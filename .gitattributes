@@ -1,0 +1,5 @@
+# LF everywhere, matching Biome's formatter, whatever core.autocrlf is set to on Windows.
+* text=auto eol=lf
+
+*.woff2 binary
+*.ico binary
