@@ -15,7 +15,13 @@ const totalSteps = 3;
 
 type Props = {
   lang: Locale;
-  event: { slug: string; name: string; date: string; coverUrl: string | null };
+  event: {
+    slug: string;
+    name: string;
+    honorees: string[];
+    date: string;
+    coverUrl: string | null;
+  };
   roles: { id: string; name: string }[];
   dict: Dictionary["join"];
   /** Absent when the hosts fixed the event's language: there is nothing to switch. */
@@ -58,6 +64,7 @@ export function JoinWizard({ lang, event, roles, dict, languageLabel }: Props) {
         <NameStep
           lang={lang}
           eventName={event.name}
+          honorees={event.honorees}
           eventDate={event.date}
           coverUrl={event.coverUrl}
           name={name}
@@ -69,7 +76,7 @@ export function JoinWizard({ lang, event, roles, dict, languageLabel }: Props) {
       ) : (
         <>
           <EventMonogram
-            name={event.name}
+            event={event}
             className="mb-6 text-center text-4xl leading-none"
           />
           <StepProgress step={step} total={totalSteps} dict={dict} />

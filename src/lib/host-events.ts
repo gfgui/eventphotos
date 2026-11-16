@@ -33,6 +33,8 @@ async function findFreeSlug(name: string) {
 
 export type EventData = {
   name: string;
+  /** Short names of who the event is for, such as the couple. Their initials make the monogram. */
+  honorees: string[];
   date: Date;
   /** In the order guests will see them. New roles have no id yet. */
   roles: { id?: string; name: string }[];
@@ -71,6 +73,7 @@ export async function findHostEvent(hostId: string, eventId: string) {
       id: true,
       slug: true,
       name: true,
+      honorees: true,
       date: true,
       appearance: true,
       guestLocale: true,

@@ -44,6 +44,7 @@ async function EventSettings({ params }: Pick<Props, "params">) {
           event={{
             id: event.id,
             name: event.name,
+            honorees: event.honorees,
             date: event.date.toISOString().slice(0, 10),
             roles: await listEditableRoles(event.id),
             guestLocale: fixedLocale(event),

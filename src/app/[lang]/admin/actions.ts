@@ -86,6 +86,11 @@ export async function logOut(lang: Locale) {
 const eventSchema = z.object({
   lang: langField,
   name: z.string().trim().min(1).max(120),
+  /** One or two short names. Blank fields are left out. */
+  honorees: z
+    .array(z.string().trim().max(40))
+    .max(2)
+    .transform((names) => names.filter(Boolean)),
   date: z.iso.date(),
   roles: z
     .array(

@@ -22,7 +22,7 @@ To check that the app reaches the database and the storage, open http://localhos
 
 The hosts' panel is at `/admin`. On the first access there is no account yet, so the page asks for the setup code, which is the value of `ADMIN_SETUP_CODE` in `.env`, and creates the account with a name, an e-mail and a password. From then on, the page is the login and the code is no longer accepted.
 
-In the panel, hosts create events, change their name, date, cover, guest roles and rankings, choose the event's appearance, open the guests' link, see the photos and download the originals, one at a time or all together in a ZIP, in folders by role and by guest. The ZIP is put together while it is being sent, so it doesn't fill the server's memory.
+In the panel, hosts create events, change their name, honorees, date, cover, guest roles and rankings, choose the event's appearance, open the guests' link, see the photos and download the originals, one at a time or all together in a ZIP, in folders by role and by guest. The ZIP is put together while it is being sent, so it doesn't fill the server's memory.
 
 How the access is protected:
 
@@ -34,6 +34,12 @@ How the access is protected:
 In local mode, use the panel on the notebook itself (`localhost`). On the Wi-Fi the app runs over plain HTTP, so a password typed on another device would travel unencrypted.
 
 There is no password recovery yet.
+
+### Honorees and the couple's photos
+
+The honorees are one or two short names of who the event celebrates, such as "Ana" and "Bruno". Their initials make the event's monogram ("AB"), which guests see in the header and, without a cover, on the welcome screen. Without honorees, the monogram comes from the event's name.
+
+New events start with a "Noivos" role, so the couple can join through the guests' link and send photos like anyone else.
 
 ### Cover
 

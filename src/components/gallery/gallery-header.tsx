@@ -3,12 +3,12 @@ import { GuestAvatar } from "@/components/guest-avatar";
 import { format } from "@/i18n/format";
 
 type Props = {
-  eventName: string;
+  event: { name: string; honorees: string[] };
   guest: { name: string; avatar: string; roleName: string };
   greeting: string;
 };
 
-export function GalleryHeader({ eventName, guest, greeting }: Props) {
+export function GalleryHeader({ event, guest, greeting }: Props) {
   const firstName = guest.name.split(/\s+/)[0];
 
   return (
@@ -23,7 +23,7 @@ export function GalleryHeader({ eventName, guest, greeting }: Props) {
         </div>
       </div>
       <EventMonogram
-        name={eventName}
+        event={event}
         className="shrink-0 text-[28px] leading-none"
       />
     </div>

@@ -81,7 +81,9 @@ O bloqueio depois de 5 senhas erradas fica para o fim (seção 13), porque trava
 ## 2. Criar o evento
 
 - [ ] Em "Criar evento", conferir o formulário.
-  Esperado: nome, data, "Idioma dos convidados" em "Automático, pelo idioma do celular", quatro papéis (Convidado, Padrinho ou madrinha, Família e Amigos) e os rankings "Fotos mais curtidas" e "Quem mais enviou fotos", os dois marcados.
+  Esperado: nome, os dois campos de "Homenageados", data, "Idioma dos convidados" em "Automático, pelo idioma do celular", cinco papéis (Noivos, Convidado, Padrinho ou madrinha, Família e Amigos) e os rankings "Fotos mais curtidas" e "Quem mais enviou fotos", os dois marcados.
+- [ ] Preencher os homenageados com "Ana" e "Bruno".
+  Esperado: depois de criado o evento, as iniciais que os convidados veem são "AB", e não as do nome do evento.
 - [ ] Deixar dois papéis com o mesmo nome (como "Família" e "família") e salvar.
   Esperado: "Cada papel precisa de um nome diferente."
 - [ ] Adicionar um papel ("Noivos"), remover outro e conferir que a lista acompanha.

@@ -12,6 +12,8 @@ import type { Dictionary } from "@/i18n/dictionaries/pt-BR";
 type Props = {
   lang: Locale;
   eventName: string;
+  /** Their initials stand in for the cover. */
+  honorees: string[];
   eventDate: string;
   /** Null when the hosts haven't chosen a cover: the event's initials stand in for it. */
   coverUrl: string | null;
@@ -26,6 +28,7 @@ type Props = {
 export function NameStep({
   lang,
   eventName,
+  honorees,
   eventDate,
   coverUrl,
   name,
@@ -60,7 +63,7 @@ export function NameStep({
         </div>
       ) : (
         <EventMonogram
-          name={eventName}
+          event={{ name: eventName, honorees }}
           className="mb-9 text-center text-[54px] leading-none"
         />
       )}

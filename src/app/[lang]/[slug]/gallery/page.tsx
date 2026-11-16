@@ -43,7 +43,7 @@ async function Gallery({ params }: Pick<Props, "params">) {
     <GalleryView
       lang={lang}
       slug={event.slug}
-      eventName={event.name}
+      event={{ name: event.name, honorees: event.honorees }}
       guest={{
         name: guest.name,
         avatar: guest.avatar,

@@ -37,6 +37,7 @@ type Props = {
   event?: {
     id: string;
     name: string;
+    honorees: string[];
     date: string;
     roles: Role[];
     guestLocale: Locale | null;
@@ -55,6 +56,11 @@ export function EventForm({ lang, event, dict }: Props) {
   const router = useRouter();
   const { error, isPending, run } = useAdminAction<EventError>();
   const [name, setName] = useState(event?.name ?? "");
+  // Always two fields; the second is optional, and blanks are left out on saving.
+  const [honorees, setHonorees] = useState(() => [
+    event?.honorees[0] ?? "",
+    event?.honorees[1] ?? "",
+  ]);
   const [date, setDate] = useState(event?.date ?? "");
   // Null: each guest's phone chooses.
   const [guestLocale, setGuestLocale] = useState(event?.guestLocale ?? null);
@@ -93,6 +99,7 @@ export function EventForm({ lang, event, dict }: Props) {
     const input = {
       lang,
       name,
+      honorees,
       date,
       roles: roles
         .filter((role) => role.name.trim())
@@ -130,6 +137,29 @@ export function EventForm({ lang, event, dict }: Props) {
         required
         maxLength={120}
       />
+      <fieldset className="grid gap-2">
+        <legend className="text-sm font-medium">{dict.honorees}</legend>
+        <p className="text-xs text-muted-foreground">{dict.honoreesHint}</p>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {honorees.map((honoree, index) => (
+            <Input
+              // Two fixed fields, which never move.
+              key={dict.honoreePlaceholders[index]}
+              aria-label={format(dict.honoree, { number: index + 1 })}
+              placeholder={dict.honoreePlaceholders[index]}
+              value={honoree}
+              onChange={(change) =>
+                setHonorees((current) =>
+                  current.map((value, position) =>
+                    position === index ? change.target.value : value,
+                  ),
+                )
+              }
+              maxLength={40}
+            />
+          ))}
+        </div>
+      </fieldset>
       <TextField
         id="event-date"
         type="date"

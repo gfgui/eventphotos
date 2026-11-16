@@ -43,7 +43,7 @@ const tabContentClass = "mx-auto w-full max-w-[540px] px-2 py-3";
 type Props = {
   lang: Locale;
   slug: string;
-  eventName: string;
+  event: { name: string; honorees: string[] };
   guest: { name: string; avatar: string; roleName: string };
   photos: GalleryPhoto[];
   /** Null when the hosts turned both rankings off: then the tab disappears. */
@@ -59,7 +59,7 @@ type Props = {
 export function GalleryView({
   lang,
   slug,
-  eventName,
+  event,
   guest,
   photos,
   podium,
@@ -225,11 +225,7 @@ export function GalleryView({
     <main className="min-h-dvh pb-[calc(80px+env(safe-area-inset-bottom))]">
       <Tabs value={currentTab} onValueChange={(value: Tab) => setTab(value)}>
         <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-xl">
-          <GalleryHeader
-            eventName={eventName}
-            guest={guest}
-            greeting={dict.greeting}
-          />
+          <GalleryHeader event={event} guest={guest} greeting={dict.greeting} />
           <div className="mx-auto max-w-[540px] px-4">
             <TabsList
               variant="line"

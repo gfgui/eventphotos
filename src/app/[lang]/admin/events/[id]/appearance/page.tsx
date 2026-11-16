@@ -41,6 +41,7 @@ async function EventAppearance({ params }: Pick<Props, "params">) {
           event={{
             id: event.id,
             name: event.name,
+            honorees: event.honorees,
             date: formatEventDate(event.date, lang),
           }}
           saved={parseAppearance(event.appearance)}

@@ -148,6 +148,11 @@ export const ptBR = {
       newTitle: "Novo evento",
       name: "Nome do evento",
       namePlaceholder: "Casamento de Ana e Bruno",
+      honorees: "Homenageados",
+      honoreesHint:
+        "O nome curto de quem o evento celebra, como os noivos. As iniciais aparecem para os convidados. O segundo nome é opcional.",
+      honoree: "Homenageado {number}",
+      honoreePlaceholders: ["Ana", "Bruno"],
       date: "Data",
       guestLocale: "Idioma dos convidados",
       guestLocaleAuto: "Automático, pelo idioma do celular",
@@ -166,7 +171,14 @@ export const ptBR = {
       likesRanking: "Fotos mais curtidas",
       uploadsRanking: "Quem mais enviou fotos",
       // Only a starting point: the hosts edit them, and they are saved as event data.
-      defaultRoles: ["Convidado", "Padrinho ou madrinha", "Família", "Amigos"],
+      // "Noivos" lets the couple join too, and send photos like any guest.
+      defaultRoles: [
+        "Noivos",
+        "Convidado",
+        "Padrinho ou madrinha",
+        "Família",
+        "Amigos",
+      ],
       create: "Criar evento",
       save: "Salvar alterações",
       saved: "Alterações salvas.",

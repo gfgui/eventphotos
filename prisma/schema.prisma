@@ -98,6 +98,9 @@ model Event {
   id                    String         @id @default(uuid(7)) @db.Uuid
   slug                  String         @unique
   name                  String
+  /// Short names of the people the event is for, such as ["Ana", "Bruno"]: one or two.
+  /// Their initials make the event's monogram.
+  honorees              String[]       @default([])
   date                  DateTime       @db.Timestamptz(3)
   coverKey              String?        @map("cover_key")
   /// Colors, font and feed style. Validated with Zod before saving.

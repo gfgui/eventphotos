@@ -27,7 +27,7 @@ import {
 } from "@/themes/config";
 
 type PreviewTexts = Pick<Dictionary["join"], "welcome" | "back" | "continue">;
-type PreviewEvent = { name: string; date: string };
+type PreviewEvent = { name: string; honorees: string[]; date: string };
 
 type Props = {
   lang: Locale;
@@ -240,7 +240,7 @@ function ThemePreview({ theme, headingFont, event, texts }: PreviewProps) {
       style={fontStyle(headingFont)}
       className="grid gap-4 bg-background px-5 py-6 text-center font-sans text-foreground"
     >
-      <EventMonogram name={event.name} className="text-3xl leading-none" />
+      <EventMonogram event={event} className="text-3xl leading-none" />
       <span className="grid gap-1">
         <span
           data-slot="eyebrow"

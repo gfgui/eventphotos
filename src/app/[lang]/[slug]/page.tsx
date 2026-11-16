@@ -55,6 +55,7 @@ async function Join({ params }: Pick<Props, "params">) {
       event={{
         slug: event.slug,
         name: event.name,
+        honorees: event.honorees,
         date: formatEventDate(event.date, lang),
         coverUrl: coverUrl(event),
       }}
