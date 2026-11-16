@@ -7,6 +7,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { Dictionary } from "@/i18n/dictionaries/pt-BR";
@@ -19,6 +20,8 @@ type Props = {
     authorName: string;
     /** The filter chosen when sending, applied here and never to the file. */
     filter: string | null;
+    /** Written by the guest when sending. */
+    caption: string | null;
   } | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -54,7 +57,14 @@ export function PhotoViewer({
           />
         </div>
         <div className="flex items-center justify-between gap-5 p-4">
-          <DialogTitle className="truncate">{title}</DialogTitle>
+          <div className="grid min-w-0 gap-1">
+            <DialogTitle className="truncate">{title}</DialogTitle>
+            {photo.caption && (
+              <DialogDescription className="text-sm break-words text-foreground">
+                {photo.caption}
+              </DialogDescription>
+            )}
+          </div>
           <div className="flex shrink-0 gap-2">
             {actions}
             <DialogClose render={<Button variant="outline" />}>

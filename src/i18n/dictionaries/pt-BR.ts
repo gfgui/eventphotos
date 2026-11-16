@@ -71,7 +71,9 @@ export const ptBR = {
     filters: {
       title: "Escolha um filtro",
       hint: "O filtro só muda como a foto aparece; o arquivo enviado continua o original.",
-      count: "O filtro vale para as {count} fotos.",
+      count: "O filtro e a descrição valem para as {count} fotos.",
+      caption: "Descrição (opcional)",
+      captionPlaceholder: "Conte o que está acontecendo",
       noPreview:
         "Este navegador não mostra a prévia desta foto, mas o filtro vale do mesmo jeito.",
       send: "Enviar",

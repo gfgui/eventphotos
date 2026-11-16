@@ -8,6 +8,8 @@ export type FeedItem = {
   alt: string;
   /** The filter chosen when sending, applied on display and never to the file. */
   filter: string | null;
+  /** Written by the guest when sending; null when there is none. */
+  caption: string | null;
   /** Null until the worker has read the photo. */
   width: number | null;
   height: number | null;

@@ -141,6 +141,7 @@ describe("starting an upload", () => {
         guestId: "guest-1",
         source: "GALLERY",
         filter: null,
+        caption: null,
         originalKey: key,
         mimeType: "image/jpeg",
         sizeBytes: 3_000_000,
@@ -185,6 +186,32 @@ describe("starting an upload", () => {
         data: expect.objectContaining({ filter: null }),
       }),
     );
+  });
+
+  it("saves the description, without the spaces around it", async () => {
+    mocks.db.media.create.mockResolvedValue({ id: "media-1" });
+    const start = signRequestSchema.parse({
+      method: "POST",
+      key: originalKey,
+      file: { type: "image/jpeg", size: 3_000_000, caption: "  A valsa  " },
+    });
+
+    await signUploadRequest(uploader, start);
+
+    expect(mocks.db.media.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({ caption: "A valsa" }),
+      }),
+    );
+  });
+
+  it("refuses a description over 150 characters", () => {
+    const start = {
+      method: "POST",
+      key: originalKey,
+      file: { type: "image/jpeg", size: 3_000_000, caption: "a".repeat(151) },
+    };
+    expect(signRequestSchema.safeParse(start).success).toBe(false);
   });
 
   it("refuses a filter the app doesn't have", () => {

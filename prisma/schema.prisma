@@ -172,6 +172,8 @@ model Media {
   thumbnailKey String?     @map("thumbnail_key")
   /// Filter name, applied with CSS on display; the file itself is never filtered.
   filter       String?
+  /// Written by the guest before sending, the same for every photo of the batch.
+  caption      String?
   mimeType     String      @map("mime_type")
   sizeBytes    Int         @map("size_bytes")
   width        Int?

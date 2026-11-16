@@ -16,7 +16,11 @@ import { filterSchema, uploadSources } from "@/lib/filters";
 import { getCurrentGuest } from "@/lib/guest-session";
 import { enqueueMediaProcessing } from "@/lib/media-worker";
 import { browserS3, s3 } from "@/lib/storage";
-import { allowedPhotoTypes, maxPhotoBytes } from "@/lib/upload-limits";
+import {
+  allowedPhotoTypes,
+  maxCaptionLength,
+  maxPhotoBytes,
+} from "@/lib/upload-limits";
 
 // Uppy cuts files in parts of 5 MiB, the smallest S3 accepts.
 const maxParts = Math.ceil(maxPhotoBytes / (5 * 1024 * 1024));
@@ -36,6 +40,7 @@ export const signRequestSchema = z.object({
       // Chosen by the guest before sending, and only ever applied on display.
       filter: filterSchema.optional(),
       source: z.enum(uploadSources).optional(),
+      caption: z.string().trim().max(maxCaptionLength).optional(),
     })
     .optional(),
 });
@@ -76,6 +81,7 @@ async function startUpload(
       guestId,
       source: file.source ?? "GALLERY",
       filter: file.filter && file.filter !== "none" ? file.filter : null,
+      caption: file.caption || null,
       originalKey: key,
       mimeType: file.type,
       sizeBytes: file.size,

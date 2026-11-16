@@ -55,9 +55,18 @@ export function PhotoFeed({ items }: { items: FeedItem[] }) {
               </span>
             )}
           </button>
-          {item.like && (
-            <footer className="p-3">
-              <LikeButton {...item.like} variant="outline" />
+          {(item.caption || item.like) && (
+            <footer className="grid gap-2 p-3">
+              {item.caption && (
+                <p className="text-sm break-words">{item.caption}</p>
+              )}
+              {item.like && (
+                <LikeButton
+                  {...item.like}
+                  variant="outline"
+                  className="justify-self-start"
+                />
+              )}
             </footer>
           )}
         </article>

@@ -8,6 +8,8 @@ export type GalleryPhoto = {
   displayUrl: string | null;
   /** The filter chosen when sending, applied on display: the file is never filtered. */
   filter: string | null;
+  /** Written by the guest when sending; null when there is none. */
+  caption: string | null;
   authorName: string;
   authorAvatar: string;
   authorRole: string;
@@ -46,6 +48,7 @@ export async function listGalleryPhotos(
       displayKey: true,
       thumbnailKey: true,
       filter: true,
+      caption: true,
       likeCount: true,
       createdAt: true,
       width: true,
@@ -63,6 +66,7 @@ export async function listGalleryPhotos(
     thumbnailUrl: item.thumbnailKey ? `/api/media/${item.id}/thumbnail` : null,
     displayUrl: item.displayKey ? `/api/media/${item.id}/display` : null,
     filter: item.filter,
+    caption: item.caption,
     authorName: item.guest.name,
     authorAvatar: item.guest.avatar,
     authorRole: item.guest.role.name,

@@ -1,6 +1,9 @@
 /** Shared by the browser, which rejects a file right away, and the server, which has the last word. */
 export const maxPhotoBytes = 50 * 1024 * 1024;
 
+/** A photo's description: a line, not a post. */
+export const maxCaptionLength = 150;
+
 /** What phones produce. SVG stays out on purpose: it is a document, not a photo. */
 export const allowedPhotoTypes = [
   "image/jpeg",

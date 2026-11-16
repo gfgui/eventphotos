@@ -72,7 +72,9 @@ export const en: Dictionary = {
     filters: {
       title: "Choose a filter",
       hint: "The filter only changes how the photo looks; the file sent stays the original.",
-      count: "The filter applies to all {count} photos.",
+      count: "The filter and the description apply to all {count} photos.",
+      caption: "Description (optional)",
+      captionPlaceholder: "Tell what is happening",
       noPreview:
         "This browser can't preview this photo, but the filter still applies.",
       send: "Send",

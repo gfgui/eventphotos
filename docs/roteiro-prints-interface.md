@@ -85,8 +85,8 @@ Na janela do convidado 1, com o modo de dispositivo ligado, abra o link dos conv
 
 ## 3. Envio de fotos
 
-- [ ] "Galeria", escolher uma foto e, na tela de filtros, tocar em "Quente".
-  Print: `convidado-05-filtros.png`, com a foto grande e a faixa de filtros, "Quente" marcado.
+- [ ] "Galeria", escolher uma foto e, na tela de filtros, tocar em "Quente" e escrever uma descrição, como "A entrada dos noivos".
+  Print: `convidado-05-filtros.png`, com a foto grande, a faixa de filtros, "Quente" marcado e a descrição.
 - [ ] Para pegar a porcentagem do envio: no DevTools, aba Network, mudar "No throttling" para "3G". "Enviar".
   Print: `convidado-06-enviando.png`, em Minhas fotos, com "Enviando N%". Depois, volte para "No throttling".
 - [ ] Enviar mais 2 ou 3 fotos pelo convidado 1, com filtros diferentes (um P&B ajuda a mostrar que o filtro aparece na galeria).

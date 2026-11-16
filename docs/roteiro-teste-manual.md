@@ -288,6 +288,8 @@ Com os dois convidados da seção 5, cada um no seu navegador.
 
 - [ ] Convidado 1: "Galeria", escolher `03-imagem.png`, tocar no filtro "P&B" e em "Enviar".
   Esperado: a prévia em "Minhas fotos" já aparece em preto e branco, e a foto publicada continua P&B na grade, na foto grande e na aba Fotos do painel.
+- [ ] "Galeria", escolher uma foto, escrever "A valsa dos noivos" na descrição e "Enviar".
+  Esperado: a descrição aparece na foto aberta, no feed em Lista e na foto aberta do painel.
 - [ ] "Galeria", escolher uma foto e, na tela de filtros, "Cancelar".
   Esperado: nada é enviado.
 - [ ] Enviar `01-paisagem-com-gps.jpg` com o filtro "Vintage". No painel, baixar o original dessa foto e comparar o SHA-256 com o do arquivo, como na seção 6.

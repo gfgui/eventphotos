@@ -33,6 +33,7 @@ export type HostPhoto = {
   originalUrl: string | null;
   /** Shown as guests see it. The original and the ZIP have no filter. */
   filter: string | null;
+  caption: string | null;
   authorName: string;
   sizeBytes: number;
   status: MediaStatus;
@@ -53,6 +54,7 @@ export async function listHostPhotos(eventId: string): Promise<HostPhoto[]> {
       thumbnailKey: true,
       displayKey: true,
       filter: true,
+      caption: true,
       guest: { select: { name: true } },
     },
   });
@@ -66,6 +68,7 @@ export async function listHostPhotos(eventId: string): Promise<HostPhoto[]> {
     displayUrl: item.displayKey ? url(item.id, "display") : null,
     originalUrl: isProcessed(item.status) ? url(item.id, "original") : null,
     filter: item.filter,
+    caption: item.caption,
     authorName: item.guest.name,
     sizeBytes: item.sizeBytes,
     status: item.status,

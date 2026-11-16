@@ -59,7 +59,7 @@ When an upload finishes, a worker running inside the app process (pg-boss, with 
 
 ### Camera and filters
 
-The bar at the bottom of the gallery has two buttons. **Tirar foto** opens the phone's own camera, through a file field with `capture`: unlike a camera inside the page, it works over plain HTTP, and it keeps the full photo. **Galeria** picks photos already on the phone. Before sending, a screen shows the first photo with each filter (Original, P&B, Quente, Frio, Vivo, Suave and Vintage), and the one chosen goes for the whole batch.
+The bar at the bottom of the gallery has two buttons. **Tirar foto** opens the phone's own camera, through a file field with `capture`: unlike a camera inside the page, it works over plain HTTP, and it keeps the full photo. **Galeria** picks photos already on the phone. Before sending, a screen shows the first photo with each filter (Original, P&B, Quente, Frio, Vivo, Suave and Vintage), and an optional description of up to 150 characters. The filter and the description go for the whole batch, and the description can't be changed later. It shows in the full-size view, in the `list` feed and in the panel.
 
 A filter is data, not an edit: its name goes to `Media.filter`, and the pages apply it with CSS (`src/lib/filters.ts`). The file sent, its versions and the ZIP never change, so the SHA-256 of the original still matches the phone's file (RNF04). `Media.source` records whether the photo came from the camera or the gallery, as the page tells it.
 

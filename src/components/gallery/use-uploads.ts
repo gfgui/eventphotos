@@ -20,7 +20,12 @@ export type Upload = {
 };
 
 /** What the guest chose for a batch of photos, before sending it. */
-export type UploadChoice = { filter: FilterId; source: UploadSource };
+export type UploadChoice = {
+  filter: FilterId;
+  source: UploadSource;
+  /** The same for every photo of the batch. Empty when the guest wrote none. */
+  caption: string;
+};
 
 // Waits before each automatic new attempt: enough to outlast a Wi-Fi hiccup at the party.
 const retryDelays = [2_000, 5_000, 10_000, 20_000, 30_000];

@@ -138,6 +138,7 @@ export function GalleryView({
       imageUrl: feedStyle === "list" ? photo.displayUrl : photo.thumbnailUrl,
       alt: format(dict.photoBy, { name: photo.authorName }),
       filter: photo.filter,
+      caption: photo.caption,
       width: photo.width,
       height: photo.height,
       author: {
@@ -203,9 +204,9 @@ export function GalleryView({
     };
   }
 
-  function send(current: Batch, filter: FilterId) {
+  function send(current: Batch, choice: { filter: FilterId; caption: string }) {
     setBatch(null);
-    if (!addFiles(current.files, { filter, source: current.source })) {
+    if (!addFiles(current.files, { ...choice, source: current.source })) {
       setWasRefused(true);
     }
     setTab("mine");
@@ -327,7 +328,7 @@ export function GalleryView({
         <FilterStep
           key={batch.key}
           files={batch.files}
-          onSend={(filter) => send(batch, filter)}
+          onSend={(choice) => send(batch, choice)}
           onCancel={() => setBatch(null)}
           dict={dict.filters}
         />

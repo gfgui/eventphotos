@@ -11,9 +11,12 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import type { Dictionary } from "@/i18n/dictionaries/pt-BR";
 import { format } from "@/i18n/format";
 import { type FilterId, filterCss, filterIds } from "@/lib/filters";
+import { maxCaptionLength } from "@/lib/upload-limits";
 
 /** A temporary address for the photo, freed when the screen closes. */
 function useObjectUrl(file: File | undefined) {
@@ -31,9 +34,9 @@ function useObjectUrl(file: File | undefined) {
 }
 
 type Props = {
-  /** The photos just picked. The filter chosen goes for all of them. */
+  /** The photos just picked. The filter and the description go for all of them. */
   files: File[];
-  onSend: (filter: FilterId) => void;
+  onSend: (choice: { filter: FilterId; caption: string }) => void;
   onCancel: () => void;
   dict: Dictionary["gallery"]["filters"];
 };
@@ -44,6 +47,7 @@ type Props = {
  */
 export function FilterStep({ files, onSend, onCancel, dict }: Props) {
   const [filter, setFilter] = useState<FilterId>("none");
+  const [caption, setCaption] = useState("");
   const previewUrl = useObjectUrl(files[0]);
 
   return (
@@ -114,11 +118,26 @@ export function FilterStep({ files, onSend, onCancel, dict }: Props) {
             ))}
           </fieldset>
 
+          <div className="grid gap-2">
+            <Label htmlFor="photo-caption">{dict.caption}</Label>
+            <Input
+              id="photo-caption"
+              value={caption}
+              onChange={(change) => setCaption(change.target.value)}
+              placeholder={dict.captionPlaceholder}
+              maxLength={maxCaptionLength}
+              enterKeyHint="send"
+              onKeyDown={(key) => {
+                if (key.key === "Enter") onSend({ filter, caption });
+              }}
+            />
+          </div>
+
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onCancel}>
               {dict.cancel}
             </Button>
-            <Button type="button" onClick={() => onSend(filter)}>
+            <Button type="button" onClick={() => onSend({ filter, caption })}>
               {dict.send}
             </Button>
           </div>
