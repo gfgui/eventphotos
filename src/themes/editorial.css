@@ -1,0 +1,54 @@
+/*
+ * Traits shared by the essential, heritage and confetti themes, which come from the same set of
+ * design systems: a paper grain behind the page, accent-colored eyebrows, semibold display titles
+ * and an accent underline under the active tab. Square corners come from each theme's --radius.
+ *
+ * Components opt in through their data-slot attribute, the same hook shadcn/ui components use.
+ */
+
+:is([data-theme="essential"], [data-theme="heritage"], [data-theme="confetti"])
+  [data-slot="eyebrow"] {
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+}
+
+:is([data-theme="essential"], [data-theme="heritage"], [data-theme="confetti"])
+  [data-slot="page-title"] {
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+:is([data-theme="essential"], [data-theme="heritage"], [data-theme="confetti"])
+  [data-slot="tabs-trigger"]::after {
+  background-color: var(--primary);
+}
+
+/*
+ * The grain sits behind the content (z-index -1 in the scope's own stacking context), so it never
+ * covers the photos. Only on the scope of the guest pages: previews in the admin panel also carry
+ * data-theme, and a fixed layer there would cover the whole panel.
+ */
+[data-slot="theme-scope"]:is(
+  [data-theme="essential"],
+  [data-theme="heritage"],
+  [data-theme="confetti"]
+) {
+  isolation: isolate;
+}
+
+[data-slot="theme-scope"]:is(
+  [data-theme="essential"],
+  [data-theme="heritage"],
+  [data-theme="confetti"]
+)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}

@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { locales } from "@/i18n/config";
 import { getDictionary, getLocale } from "@/i18n/dictionaries";
+import { themeFontVariables } from "@/themes/fonts";
 import "../globals.css";
 
 // Bundled with the app: local mode must work without internet access.
 const inter = localFont({
   src: "../../fonts/inter-latin-wght-normal.woff2",
-  variable: "--font-inter",
+  variable: "--font-sans",
   weight: "100 900",
   display: "swap",
 });
@@ -28,7 +29,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   return (
     <html
       lang={await getLocale()}
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${themeFontVariables} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

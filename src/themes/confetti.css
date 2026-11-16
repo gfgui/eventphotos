@@ -1,0 +1,48 @@
+/*
+ * "Confete": light and casual. Fraunces titles over Nunito Sans, a purple accent, dark outlines
+ * and hard offset shadows. Colors from the skeleton-ds prototype.
+ */
+[data-theme="confetti"] {
+  --background: #fff9e8;
+  --foreground: #272530;
+  --card: #fffaeb;
+  --card-foreground: #272530;
+  --popover: #fffaeb;
+  --popover-foreground: #272530;
+  --primary: #7854d8;
+  --primary-foreground: #ffffff;
+  --secondary: #eadfff;
+  --secondary-foreground: #272530;
+  --muted: #eadfff;
+  --muted-foreground: #716c71;
+  --accent: #eadfff;
+  --accent-foreground: #272530;
+  --border: #2f2b36;
+  --input: #2f2b36;
+  --ring: #7854d8;
+  --radius: 0rem;
+  --font-sans: var(--font-nunito-sans);
+  --heading-font: var(--font-fraunces);
+  /* Only this theme's: the shadow of a selected option. */
+  --confetti-pink: #ff799e;
+}
+
+/*
+ * Hard offset shadows. They're drawn with filter, not box-shadow, so the focus ring (a box-shadow)
+ * still shows on top of them.
+ */
+[data-theme="confetti"] [data-slot="button"][data-variant="default"] {
+  filter: drop-shadow(4px 4px 0 var(--foreground));
+}
+
+[data-theme="confetti"] [data-slot="button"][data-variant="outline"] {
+  filter: drop-shadow(3px 3px 0 var(--border));
+}
+
+[data-theme="confetti"] [data-slot="button"][aria-pressed="true"] {
+  filter: drop-shadow(3px 3px 0 var(--confetti-pink));
+}
+
+[data-theme="confetti"] [data-slot="event-monogram"] {
+  rotate: -3deg;
+}

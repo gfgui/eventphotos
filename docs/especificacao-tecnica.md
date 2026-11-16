@@ -37,7 +37,7 @@ Os requisitos incorporam a personalização do evento pelos anfitriões, a entra
 | RNF06 | Retomar o envio após uma queda do Wi-Fi | Derrubar a rede no meio de um envio |
 | RNF07 | Fontes, avatares e demais recursos embutidos no app, sem depender de CDN | Rodar o modo local com o roteador sem internet |
 | RNF08 | Convidados recebem versões sem metadados de localização; o original fica só com os anfitriões (LGPD) | Inspecionar o EXIF das imagens servidas |
-| RNF09 | Interface em português do Brasil (padrão) e inglês, escolhida pelo idioma do celular e trocável na própria página | Abrir o app com o celular configurado em cada idioma e trocar pelo seletor |
+| RNF09 | Interface em português do Brasil (padrão) e inglês, escolhida pelo idioma do celular e trocável na própria página, ou fixada pelos anfitriões para o evento | Abrir o app com o celular configurado em cada idioma e trocar pelo seletor; fixar um idioma no painel |
 
 ## Arquitetura
 
@@ -95,7 +95,7 @@ Nos dois modos, o celular fala com a mesma aplicação; muda apenas onde ficam o
 - **Processamento em segundo plano com pg-boss:** miniatura, versão de exibição sem metadados, leitura de HEIC e hash, numa fila guardada no próprio Postgres.
 - **Tempo real com SSE e LISTEN/NOTIFY:** cada foto nova, curtida ou mudança de tema gera um aviso no Postgres, que chega a todos os celulares, mesmo com várias instâncias na nuvem.
 - **Personalização sem código:** a aparência do evento é um JSON validado, aplicado como variáveis CSS; fontes e avatares vêm embutidos no app.
-- **Interface bilíngue:** os textos da interface ficam em dicionários, em português do Brasil (padrão) e inglês, e as páginas ficam sob `/pt-BR` e `/en`. O endereço do QR Code não tem idioma: o app usa o idioma escolhido antes ou, na primeira visita, o do celular. O que os anfitriões digitam, como os nomes dos papéis, não é traduzido.
+- **Interface bilíngue:** os textos da interface ficam em dicionários, em português do Brasil (padrão) e inglês, e as páginas ficam sob `/pt-BR` e `/en`. O endereço do QR Code não tem idioma: o app usa o idioma escolhido antes ou, na primeira visita, o do celular. Os anfitriões podem fixar o idioma dos convidados de um evento; nesse caso, todas as telas do evento ficam nele, e os links de troca somem. O que os anfitriões digitam, como os nomes dos papéis, não é traduzido.
 - **Filtros não destrutivos:** o filtro é aplicado na exibição com CSS, e o original nunca é recomprimido.
 - **Configuração por variáveis de ambiente:** modo, endereço público, banco e armazenamento.
 - **Rede local:** roteador dedicado, com o QR Code apontando para o IP fixo do notebook.
@@ -107,7 +107,7 @@ O banco é Postgres, modelado com Prisma, e as mesmas migrações valem para os 
 | Entidade | Campos principais | Observações |
 | --- | --- | --- |
 | Anfitrião | id, nome, e-mail, hash da senha | Um evento pode ter mais de um anfitrião (tabela de ligação) |
-| Evento | id, slug, nome, data, capa, aparência, rankingCurtidas, rankingFotos, modoModeracao, status | Aparência em JSON (cores, fonte, estilo do feed), validada com Zod antes de salvar |
+| Evento | id, slug, nome, data, capa, aparência, idiomaConvidados, rankingCurtidas, rankingFotos, modoModeracao, status | Aparência em JSON (cores, fonte, estilo do feed), validada com Zod antes de salvar; idiomaConvidados vazio deixa o celular de cada convidado escolher |
 | Papel | id, evento, nome, ordem | Lista editável pelos anfitriões |
 | Convidado | id, evento, nome, papel, avatar, hash do token, criado em | Sem senha, identificado pelo cookie; avatar é uma referência a um conjunto embutido, como "descontraido/12" |
 | Mídia | id, evento, convidado, tipo, origem (câmera ou galeria), chave do original, chave da exibição, chave da miniatura, filtro, MIME, tamanho, dimensões, SHA-256, data de captura (EXIF), status, total de curtidas, criada em | O filtro é guardado como dado, não aplicado ao arquivo; o total de curtidas fica na própria mídia, com índice, para ordenar rápido |

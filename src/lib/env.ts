@@ -12,6 +12,8 @@ const envSchema = z.object({
   S3_SECRET_ACCESS_KEY: z.string().min(1),
   // Garage only serves path-style URLs (endpoint/bucket/key).
   S3_FORCE_PATH_STYLE: z.stringbool().default(false),
+  // Asked for when the first admin account is created.
+  ADMIN_SETUP_CODE: z.string().min(24),
 });
 
 const parsed = envSchema.safeParse(process.env);

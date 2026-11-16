@@ -12,7 +12,7 @@ export function LanguageSwitcher({ current, label }: Props) {
   const rest = pathname.slice(`/${current}`.length);
 
   return (
-    <nav aria-label={label} className="mt-4 flex gap-4 text-sm">
+    <nav aria-label={label} className="mt-4 flex justify-center gap-4 text-sm">
       {locales.map((locale) =>
         locale === current ? (
           <span key={locale} aria-current="true" className="font-semibold">

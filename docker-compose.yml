@@ -59,6 +59,28 @@ services:
     command: ["node", "/garage-init.mjs"]
     restart: "no"
 
+  # Load test, only when asked for: npm run load:run. See "Load test" in the README.
+  k6:
+    image: grafana/k6:2.4.0
+    profiles: ["load-test"]
+    # The app and the storage listen on the notebook, outside this container.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      BASE_URL: http://host.docker.internal:3000
+      STORAGE_HOST: host.docker.internal:3900
+      # Empty unless set when running, which keeps the script's defaults.
+      GUESTS: ${GUESTS:-}
+      UPLOADERS: ${UPLOADERS:-}
+      PHOTOS: ${PHOTOS:-}
+      DURATION: ${DURATION:-}
+      LIKERS: ${LIKERS:-}
+      ROUNDS: ${ROUNDS:-}
+    volumes:
+      - ./load-tests:/load-tests
+    command: ["run", "/load-tests/guests.js"]
+    restart: "no"
+
 volumes:
   postgres-data:
   garage-meta:

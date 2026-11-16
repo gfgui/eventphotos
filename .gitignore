@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+# load test: guests' cookies, the test photo and the reports, created by npm run load:seed
+/load-tests/.data/
 
 # next.js
 /.next/

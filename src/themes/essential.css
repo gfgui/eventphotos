@@ -1,0 +1,25 @@
+/*
+ * "Essencial": neutral and contemporary. Newsreader titles over Inter, a dark green accent,
+ * thin lines and square corners. Colors from the skeleton-ds prototype.
+ */
+[data-theme="essential"] {
+  --background: #fbfaf7;
+  --foreground: #20211e;
+  --card: #fcfbf8;
+  --card-foreground: #20211e;
+  --popover: #fcfbf8;
+  --popover-foreground: #20211e;
+  --primary: #303c34;
+  --primary-foreground: #ffffff;
+  --secondary: #ecece6;
+  --secondary-foreground: #20211e;
+  --muted: #ecece6;
+  --muted-foreground: #73746e;
+  --accent: #ecece6;
+  --accent-foreground: #20211e;
+  --border: #ddddd7;
+  --input: #ddddd7;
+  --ring: #303c34;
+  --radius: 0rem;
+  --heading-font: var(--font-newsreader);
+}

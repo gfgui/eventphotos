@@ -1,0 +1,31 @@
+/*
+ * "Herança": romantic and ornate. Cormorant Garamond titles over Jost, a burgundy accent on warm
+ * paper and square corners. Colors from the skeleton-ds prototype.
+ */
+[data-theme="heritage"] {
+  --background: #f8f1e7;
+  --foreground: #36281f;
+  --card: #f9f3eb;
+  --card-foreground: #36281f;
+  --popover: #f9f3eb;
+  --popover-foreground: #36281f;
+  --primary: #7d3541;
+  --primary-foreground: #fff9f0;
+  --secondary: #eadbcb;
+  --secondary-foreground: #36281f;
+  --muted: #eadbcb;
+  --muted-foreground: #7e695b;
+  --accent: #eadbcb;
+  --accent-foreground: #36281f;
+  --border: #cfbcaa;
+  --input: #cfbcaa;
+  --ring: #7d3541;
+  --radius: 0rem;
+  --font-sans: var(--font-jost);
+  --heading-font: var(--font-cormorant-garamond);
+}
+
+/* The theme's signature: page titles in italic. */
+[data-theme="heritage"] [data-slot="page-title"] {
+  font-style: italic;
+}

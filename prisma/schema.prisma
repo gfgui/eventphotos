@@ -52,15 +52,33 @@ enum MediaStatus {
 }
 
 model Host {
-  id           String      @id @default(uuid(7)) @db.Uuid
-  name         String
-  email        String      @unique
-  passwordHash String      @map("password_hash")
-  createdAt    DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt    DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
-  events       EventHost[]
+  id                String        @id @default(uuid(7)) @db.Uuid
+  name              String
+  email             String        @unique
+  passwordHash      String        @map("password_hash")
+  /// Wrong passwords in a row. Too many of them block the login for a while.
+  failedLogins      Int           @default(0) @map("failed_logins")
+  lastFailedLoginAt DateTime?     @map("last_failed_login_at") @db.Timestamptz(3)
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  events            EventHost[]
+  sessions          HostSession[]
 
   @@map("hosts")
+}
+
+/// A browser signed in to the admin panel.
+model HostSession {
+  id        String   @id @default(uuid(7)) @db.Uuid
+  hostId    String   @map("host_id") @db.Uuid
+  /// SHA-256 of the token kept in the host's cookie.
+  tokenHash String   @unique @map("token_hash")
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  host      Host     @relation(fields: [hostId], references: [id], onDelete: Cascade)
+
+  @@index([hostId])
+  @@map("host_sessions")
 }
 
 /// An event can have more than one host.
@@ -84,6 +102,8 @@ model Event {
   coverKey              String?        @map("cover_key")
   /// Colors, font and feed style. Validated with Zod before saving.
   appearance            Json           @default("{}")
+  /// Language of every guest page, such as "en". Null lets each guest's phone choose it.
+  guestLocale           String?        @map("guest_locale")
   likesRankingEnabled   Boolean        @default(true) @map("likes_ranking_enabled")
   uploadsRankingEnabled Boolean        @default(true) @map("uploads_ranking_enabled")
   moderationMode        ModerationMode @default(HIDE_AFTER) @map("moderation_mode")

@@ -38,5 +38,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Skip API routes, Next.js internals and files with an extension (favicon, fonts).
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // The slashes matter: an event's address can start with "api", like /apiario.
+  matcher: ["/((?!api/|_next/|.*\\..*).*)"],
 };
